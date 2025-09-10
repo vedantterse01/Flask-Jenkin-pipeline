@@ -10,7 +10,7 @@ def home():
 
 @app.get("/api/ping")
 def api_ping():
-    return jsonify({"status": "ok", "message": "works"})
+    return jsonify({"status": "ok", "message": "works!"})
 
 if __name__ == "__main__":
     # For local dev only; in production, use a WSGI server like gunicorn

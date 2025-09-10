@@ -35,3 +35,22 @@ $env:FLASK_APP = "app:app"; $env:FLASK_ENV = "development"; flask run
 ```powershell
 python smoke_test.py
 ```
+
+## Docker (lightweight image)
+
+Build and run on Windows (Docker Desktop required):
+
+```powershell
+# Build the image
+docker build -t flask-hello:latest .
+
+# Run the container (serves on port 8000)
+docker run -d -p 8000:8000 --name flask-hello-app flask-hello:latest
+
+# Test endpoints
+(Invoke-WebRequest -UseBasicParsing http://127.0.0.1:8000/).Content | Select-String -Pattern "<h1>Hello, World!</h1>" -Quiet
+(Invoke-WebRequest -UseBasicParsing http://127.0.0.1:8000/api/ping).Content
+
+# Stop and remove when done
+docker stop flask-hello-app; docker rm flask-hello-app
+```
